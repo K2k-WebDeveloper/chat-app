@@ -74,7 +74,7 @@ const EditProfile = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/api/users/me", {
+        const response = await axios.get("https://api.messageinabotlle.app/api/users/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const userData = response.data;
@@ -83,7 +83,7 @@ const EditProfile = () => {
         setEmail(userData.email);
         setPhoneNumber(userData.mobile);
         if (userData.avatar) {
-          setAvatarPreview(`http://localhost:5000/${userData.avatar}`);
+          setAvatarPreview(`https://api.messageinabotlle.app/${userData.avatar}`);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -124,7 +124,7 @@ const EditProfile = () => {
       }
 
       const response = await axios.put(
-        "http://localhost:5000/api/users/me",
+        "https://api.messageinabotlle.app/api/users/me",
         formData,
         {
           headers: {
@@ -314,7 +314,7 @@ export default EditProfile;
 //     const fetchUserData = async () => {
 //       try {
 //         const token = localStorage.getItem("token");
-//         const response = await axios.get("http://localhost:5000/api/users/me", {
+//         const response = await axios.get("https://api.messageinabotlle.app/api/users/me", {
 //           headers: { Authorization: `Bearer ${token}` },
 //         });
 //         const userData = response.data;
@@ -336,7 +336,7 @@ export default EditProfile;
 //     try {
 //       const token = localStorage.getItem("token");
 //       const response = await axios.put(
-//         "http://localhost:5000/api/users/me",
+//         "https://api.messageinabotlle.app/api/users/me",
 //         { firstName, lastName, mobile: phoneNumber },
 //         { headers: { Authorization: `Bearer ${token}` } }
 //       );

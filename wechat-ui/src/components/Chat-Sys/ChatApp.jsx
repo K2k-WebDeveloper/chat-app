@@ -31,7 +31,7 @@ function ChatApp() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/users"
+        "https://api.messageinabotlle.app/users"
       );
       setUsers(response.data);
     } catch (error) {
@@ -159,7 +159,7 @@ export default ChatApp;
 //     navigate("/login");
 //   };
 //   // const fetch = async () => {
-//   //   const url = "http://localhost:5000/users";
+//   //   const url = "https://api.messageinabotlle.app/users";
 //   //   const response = await axios.get(url);
 //   //   console.log("userData", response.data);
 //   //   setUserData([...userData, response.data]);

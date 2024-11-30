@@ -26,7 +26,7 @@ const Header = ({
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/api/users/me",
+          "https://api.messageinabotlle.app/api/users/me",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -35,7 +35,7 @@ const Header = ({
         setUserData(response.data);
         if (userData.avatar) {
           setAvatarPreview(
-            `http://localhost:5000/${userData.avatar}`
+            `https://api.messageinabotlle.app/${userData.avatar}`
           );
         }
       } catch (error) {
@@ -101,7 +101,7 @@ const Header = ({
             <Avatar
               src={
                 userData && userData.avatar
-                  ? `http://localhost:5000/${userData.avatar}`
+                  ? `https://api.messageinabotlle.app/${userData.avatar}`
                   : "/api/placeholder/32/32"
               }
               alt="Profile"

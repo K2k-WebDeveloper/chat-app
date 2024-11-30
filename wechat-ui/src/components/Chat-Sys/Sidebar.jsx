@@ -169,7 +169,7 @@ function Sidebar({ onSelectUser, activeUserId, users, currentUserId }) {
                 <div className="w-12 h-12 rounded-full mr-3 bg-gray-300 flex items-center justify-center">
                   {user.avatar ? (
                     <img
-                      src={`http://localhost:5000/${user.avatar}`}
+                      src={`https://api.messageinabotlle.app/${user.avatar}`}
                       alt={user.firstName}
                       className="rounded-full"
                     />

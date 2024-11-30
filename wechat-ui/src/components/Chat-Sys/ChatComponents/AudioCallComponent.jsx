@@ -297,7 +297,7 @@ const AudioCall = ({ open, onClose, contact, socket }) => {
       <Box display="flex" flexDirection="column" alignItems="center">
         {/* Contact Information */}
         <Avatar
-          src={`http://localhost:5000/${contact.avatar}`}
+          src={`https://api.messageinabotlle.app/${contact.avatar}`}
           alt={contact.firstName}
           sx={{ width: 80, height: 80, mb: 2 }}
         />

@@ -19,9 +19,8 @@ function LoginForm() {
       setError("Please fill in both fields");
       return;
     }
-
     try {
-      const url = "http://localhost:5000/api/auth/login";
+      const url = "https://api.messageinabotlle.app/api/auth/login";
       const { data } = await axios.post(url, { email, password });
       localStorage.setItem("token", data.token);
       localStorage.setItem("Puser", data.user.id);
@@ -108,12 +107,6 @@ function LoginForm() {
           >
             Remember Me
           </label>
-          <a
-            href="/forgotpassword"
-            className="ml-auto text-sm font-medium text-[#FF8682]"
-          >
-            Forgot Password
-          </a>
         </div>
 
         <button
@@ -132,7 +125,7 @@ function LoginForm() {
             Sign Up
           </button>
         </p>
-        
+       
       </form>
     </div>
   );

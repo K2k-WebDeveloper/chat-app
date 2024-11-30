@@ -16,7 +16,7 @@ export const SocketProvider = ({ children }) => {
     const userId = localStorage.getItem("Puser");
     const userName = localStorage.getItem("Puser");
 
-    const newSocket = io("http://localhost:5000");
+    const newSocket = io("https://api.messageinabotlle.app");
 
     newSocket.on("connect", () => {
       console.log("Socket connected");

@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import EmojiPicker from "emoji-picker-react";
 import ProfileSidebar from "./ChatComponents/ProfileSidebar";
-import AudioCallComponent from "./ChatComponents/AudioCallComponent";
-import VideoComponent from "./ChatComponents/VideoCallComponent";
 import { io } from "socket.io-client";
 import chatbg from "../../assets/chatbg.png";
 import logo from "../../assets/logo.jpg";
@@ -21,7 +19,7 @@ import { DockIcon, FileScan, List } from "lucide-react";
 import { DocumentScanner, LocationOn, LockClock, PunchClock, Share } from "@mui/icons-material";
 import { ListItemIcon, Select } from "@mui/material";
 
-const SOCKET_URL = "http://localhost:5000";
+const SOCKET_URL = "https://api.messageinabotlle.app";
 const ALLOWED_FILE_TYPES = {
   image: ["image/jpeg", "image/png", "image/gif"],
   video: ["video/mp4", "video/webm"],
@@ -455,7 +453,7 @@ function ChatArea({ activeUser }) {
     <div className="flex items-center mx-8 lg:mx-4 md:mx-8">
       <div className="w-10 h-10 rounded-full mr-3 bg-gray-300 flex items-center justify-center">
         <img
-          src={`http://localhost:5000/${activeUser.avatar}`}
+          src={`https://api.messageinabotlle.app/${activeUser.avatar}`}
           alt={activeUser.firstName}
           className="w-full h-full rounded-full object-cover"
         />

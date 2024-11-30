@@ -31,26 +31,28 @@ const VideoCallComponent = ({ open, onClose, contact, socket }) => {
   };
 
   const initializePeerConnection = () => {
-    if (!peerConnection.current || peerConnection.current.signalingState === "closed") {
-      peerConnection.current = new RTCPeerConnection(servers);
-  
-      peerConnection.current.onicecandidate = (event) => {
-        if (event.candidate) {
-          socket.emit("iceCandidate", {
-            to: contact._id,
-            candidate: event.candidate,
-          });
-        }
-      };
-  
-      peerConnection.current.ontrack = (event) => {
-        if (remoteVideoRef.current) {
-          setRemoteStream(event.streams[0]);
-          remoteVideoRef.current.srcObject = event.streams[0];
-        }
-      };
+    if (peerConnection.current && peerConnection.current.signalingState !== "closed") {
+      peerConnection.current.close();
     }
+    peerConnection.current = new RTCPeerConnection(servers);
+  
+    peerConnection.current.onicecandidate = (event) => {
+      if (event.candidate) {
+        socket.emit("iceCandidate", {
+          to: contact._id,
+          candidate: event.candidate,
+        });
+      }
+    };
+  
+    peerConnection.current.ontrack = (event) => {
+      if (remoteVideoRef.current) {
+        setRemoteStream(event.streams[0]);
+        remoteVideoRef.current.srcObject = event.streams[0];
+      }
+    };
   };
+  
   
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const VideoCallComponent = ({ open, onClose, contact, socket }) => {
     socket.on("callAccepted", async (signal) => {
       try {
         console.log("Signal received in callAccepted:", signal);
+        console.log("Sigal ",peerConnection.current)
         if (peerConnection.current?.signalingState === "have-local-offer") {
           const answerDesc = new RTCSessionDescription(signal);
           await peerConnection.current.setRemoteDescription(answerDesc);
@@ -126,7 +129,12 @@ const VideoCallComponent = ({ open, onClose, contact, socket }) => {
       });
   
       const offer = await peerConnection.current.createOffer();
-      await peerConnection.current.setLocalDescription(offer);
+      await peerConnection.current.setLocalDescription(offer); // Await this
+  
+      console.log(
+        "Signaling state after setting local description:",
+        peerConnection.current.signalingState
+      ); // Should log "have-local-offer"
   
       socket.emit("callUser", {
         userToCall: contact._id,
@@ -139,6 +147,7 @@ const VideoCallComponent = ({ open, onClose, contact, socket }) => {
       console.error("Error starting call:", error);
     }
   };
+  
   
 
   const answerCall = async () => {
@@ -158,7 +167,7 @@ const VideoCallComponent = ({ open, onClose, contact, socket }) => {
       localVideoRef.current.srcObject = stream;
   
       initializePeerConnection();
-  
+      console.log("connection ",peerConnection.current)
       stream.getTracks().forEach((track) => {
         peerConnection.current.addTrack(track, stream);
       });

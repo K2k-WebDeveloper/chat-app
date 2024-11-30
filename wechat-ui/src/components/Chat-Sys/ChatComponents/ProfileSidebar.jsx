@@ -71,7 +71,7 @@ const ProfileSidebar = ({
             >
               <Avatar
                 src={
-                  `http://localhost:5000/${contact.avatar}` ||
+                  `https://api.messageinabotlle.app/${contact.avatar}` ||
                   "/api/placeholder/100/100"
                 }
                 alt={contact?.firstName || "Contact"}
